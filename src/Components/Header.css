@@ -1,0 +1,42 @@
+/*Header.css*/
+
+.head {
+  width: 100%;
+  height: 50px;
+  background: conic-gradient(from 180deg at 0.00% 100.00%, rgba(38.25, 87.12, 255, 0.80) 219deg, rgba(9.82, 68.18, 218.26, 0.72) 272deg);
+  position: relative;
+  
+}
+
+
+
+.foot{
+  width: 100%;
+  height: 80px;
+  background: linear-gradient(180deg, #667EEA 0%, #031A41 100%);
+  margin-top: 50px;
+  
+}
+
+h2{
+    color: white;
+    font-Size: 20px;
+    font-Family: 'Roboto';
+    text-Align: center;
+    padding-top: 30px;
+  }
+  
+
+.window-actions {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+}
+
+.window-actions button {
+  background: white;
+  border: none;
+  cursor: pointer;
+  margin-right: 10px;
+}
