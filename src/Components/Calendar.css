@@ -1,18 +1,32 @@
 /* Calendar.css */
 
 /* Ensure FullCalendar container takes full width */
-.fc {
+/* .fc {
   width: 100%;
+} */
+
+body{
+  background-color:black;
+  color: white;
+}
+
+.allcal{
+  background-color: black;
+}
+
+.headerToolbar{
+  background-color: black;
 }
 
 /* Adjust calendar height for smaller screens */
 .fc-view {
-  height: 70vh; /* Adjust as needed */
+  height: 70vh;
+  
 }
 
 /* Center the calendar title */
 .fc-toolbar-title {
-  color: #000; /* Change to your desired color */
+  color: white; /* Change to your desired color */
   text-align: center;
 }
 
@@ -28,29 +42,29 @@
   text-decoration: none;
   outline: none;
   color: #fff;
-  background-color: #2c4a7c;
+  background-color: #00B4D8;
   border: none;
   border-radius: 15px;
-  box-shadow: 0 9px #667eea;
+  box-shadow: 0 9px #2c4a7c;
   width: 20%; /* Adjust width */
   margin: 0 auto; /* Center horizontally */
 }
 
 .button1:hover {
-  background-color: #667eea;
-  box-shadow: 0 9px #2c4a7c;
+  background-color: #48CAE4;
+  box-shadow: 0 9px #48CAE4;
 }
 
 .button1:active {
-  background-color: #2c4a7c;
-  box-shadow: 0 5px #666;
+  background-color: #00B4D8;
+  box-shadow: 0 5px #48CAE4;
   transform: translateY(4px);
 }
 
 /* Style the Save button */
 .button2 {
   margin-bottom: 20px;
-  margin-top: 10px;
+  margin-top: 20px;
   display: block; /* Display as block to take full width */
   padding: 15px 25px; /* Adjust padding */
   font-size: 18px; /* Adjust font size */
@@ -59,22 +73,22 @@
   text-decoration: none;
   outline: none;
   color: #fff;
-  background-color: #667eea;
+  background-color: #00B4D8;
   border: none;
   border-radius: 15px;
   box-shadow: 0 9px #2c4a7c;
-  width: 20%; /* Adjust width */
+  width: 30%; /* Adjust width */
   margin: 0 auto; /* Center horizontally */
 }
 
 .button2:hover {
-  background-color: #2c4a7c;
-  box-shadow: 0 9px #667eea;
+  background-color: #48CAE4;
+  box-shadow: 0 9px #48CAE4;
 }
 
 .button2:active {
-  background-color: #2c4a7c;
-  box-shadow: 0 5px #666;
+  background-color: #00B4D8;
+  box-shadow: 0 5px #48CAE4;
   transform: translateY(4px);
 }
 
@@ -91,5 +105,57 @@
   text-align: center;
   margin-top: 20px;
 }
+
+.fc-toolbar .fc-button-primary {
+  background: #48CAE4;
+  /* background: conic-gradient(from 180deg at 0.00% 100.00%, rgba(163, 180, 236, 0.8) 219deg, rgba(9.82, 68.18, 218.26, 0.72) 272deg);  */
+  color: #ffffff; /* Change to your desired text color */
+  border: #48CAE4
+}
+
+
+.fc-toolbar .fc-button-primary:active{
+  background: #48CAE4;
+}
+
+.fc-toolbar {
+  background-color: black;
+
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+.modal-content {
+  background-color: black;
+  padding: 20px;
+  padding-top: 10px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  z-index: 1;
+  }
+
+.fc-list-event:hover {
+  color: black;
+}
+
+.fc-list-day{
+  color: black;
+}
+
+.fc-day-today {
+  background-color: #4296a7;
+}
+
 
 

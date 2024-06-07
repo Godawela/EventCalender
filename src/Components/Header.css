@@ -3,17 +3,39 @@
 .head {
   width: 100%;
   height: 50px;
-  background: conic-gradient(from 180deg at 0.00% 100.00%, rgba(38.25, 87.12, 255, 0.80) 219deg, rgba(9.82, 68.18, 218.26, 0.72) 272deg);
+  /* background: conic-gradient(from 180deg at 0.00% 100.00%, rgba(38.25, 87.12, 255, 0.80) 219deg, rgba(9.82, 68.18, 218.26, 0.72) 272deg); */
+  background-color: #00B4D8;
+  /* background-color: #6699CC; */
+  /* background: conic-gradient(from 180deg at 0.00% 100.00%, rgba(163, 180, 236, 0.8) 219deg, rgb(29, 38, 52, 0.72) 272deg);  */
   position: relative;
+  
   
 }
 
+.icon {
+  vertical-align: middle;
+  font-size: 20px;
+  z-index: 1;
+  position: relative;
+  top: 25%;
+  margin-left: 10px;
+  color: whitesmoke;
+}
 
+.back{
+  color: black;
+  margin-left: px;
+  top: 25%;
+  position: absolute;
+  text-decoration: none;
+  color: white;
+}
 
 .foot{
   width: 100%;
   height: 80px;
-  background: linear-gradient(180deg, #667EEA 0%, #031A41 100%);
+  background-color: #00B4D8;
+  /* background: linear-gradient(180deg, #667EEA 0%, #031A41 100%); */
   margin-top: 50px;
   
 }

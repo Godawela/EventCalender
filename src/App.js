@@ -36,7 +36,6 @@ function App() {
       
       <Header></Header>
       <Calendar events={events} setEvents={setEvents}></Calendar>
-      
       <Footer></Footer>
       
     </div>

@@ -11,6 +11,9 @@ import './Calendar.css';
 import axios from 'axios';
 import tippy from 'tippy.js';
 
+
+
+
 export default function Calendar() {
     const calendarRef = useRef(null);
     const [events, setEvents] = useState([]);
@@ -28,7 +31,8 @@ export default function Calendar() {
         const fetchEvents = async () => {
             try {
                 const response = await axios.get('http://localhost:8080/events');
-                setEvents(response.data);
+                const externalEvents=await fetchExternalEvents();
+                setEvents([...response.data,...externalEvents]);
             } catch (error) {
                 console.error('Error fetching events:', error);
             }
@@ -36,6 +40,20 @@ export default function Calendar() {
 
         fetchEvents();
     }, []);
+
+    const fetchExternalEvents = async () => {
+        try {
+            const response = await axios.get('#'); 
+            return response.data.map(event => ({
+                ...event,
+                source: 'external',
+            }));
+        } catch (error) {
+            console.error('Error fetching external events:', error);
+            return [];
+        }
+    };
+
 
     const handleDateClick = (info) => {
         setSelectedDate(info.date);
@@ -101,6 +119,11 @@ export default function Calendar() {
     };
 
     const handleUpdateEvent = async () => {
+        if (currentEvent.source === 'external') {
+            alert('External events cannot be updated.');
+            return;
+        }
+
         try {
             const updatedEvent = {
                 ...currentEvent.extendedProps, // Use extendedProps to preserve other fields
@@ -122,6 +145,11 @@ export default function Calendar() {
     };
 
     const handleDeleteEvent = async () => {
+        if (currentEvent.source==='external'){
+            alert("External Events cannot be deleted");
+            return;
+        }
+
         try {
             await axios.delete(`http://localhost:8080/events/${currentEvent.id}`);
             setEvents(events.filter(event => event.id !== currentEvent.id));
@@ -137,28 +165,37 @@ export default function Calendar() {
     };
 
     const handleMouseEnter = (info) => {
+        const start = new Date(info.event.start).toLocaleString();
+        const end = info.event.end ? new Date(info.event.end).toLocaleString() : 'No end time';
+        const description = info.event.extendedProps.description || 'No details provided';
+
         tippy(info.el, {
-            content: info.event.extendedProps.description || info.event.title,
+            content: `
+                <strong>${info.event.title}</strong><br>
+                <strong>Start:</strong> ${start}<br>
+                <strong>End:</strong> ${end}<br>
+                <strong>Details:</strong> ${description}
+            `,
             arrow: true,
             placement: 'top',
+            allowHTML: true,
         });
     };
 
     return (
-        <div>
+        <div className='allcal'>
             <FullCalendar
                 ref={calendarRef}
                 plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin]}
                 initialView={'dayGridMonth'}
                 selectable={true}
                 editable={true}
-                dayMaxEvents={true}
                 dateClick={handleDateClick}
                 eventClick={handleEventClick}
                 events={events}
                 eventMouseEnter={handleMouseEnter}
                 eventColor='#00CCCC'
-                eventBackgroundColor='#00cccc'
+                eventBackgroundColor='black'
                 displayEventTime={true}
                 displayEventEnd={true}
                 eventOrder='start'
@@ -168,6 +205,7 @@ export default function Calendar() {
                     end: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek',
                 }}
                 height={'90vh'}
+               
             />
 
             <div className="button1" onClick={handleButtonClick}>
@@ -175,7 +213,7 @@ export default function Calendar() {
             </div>
 
             {showEventModal && (
-                <div className="modal">
+                <div className="modal-overlay">
                     <div className="modal-content">
                         <h2>{mode === 'create' ? 'Create Event' : 'Update Event'}</h2>
                         <div className='button2-container'>
@@ -223,18 +261,20 @@ export default function Calendar() {
                             />
                             <label htmlFor="allDayCheckbox">All Day</label>
                         </div>
-                        <div className="button-container">
+                        <div className="button2-container">
                             <div className="button2" onClick={handleSaveOrUpdateEvent}>
                                 {mode === 'create' ? 'Save' : 'Update'}
                             </div>
+                            
                             {mode === 'update' && (
-                                <div className="button2 delete" onClick={handleDeleteEvent}>
+                                    
+                                <div style={{ margin: '20px 120px' }} className="button2" onClick={handleDeleteEvent}>
                                     Delete
                                 </div>
                             )}
                         </div>
-                        <div className="button-container">
-                            <button className="button2 cancel" onClick={() => setShowEventModal(false)}>
+                        <div className="button2-container">
+                            <button className="button2" onClick={() => setShowEventModal(false)}>
                                 Cancel
                             </button>
                         </div>
